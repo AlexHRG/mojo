@@ -1,11 +1,13 @@
 package com.example.unrealmojo.test;
 
+import java.net.URI;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HamsterActivity extends Activity {
@@ -20,10 +22,17 @@ public class HamsterActivity extends Activity {
 		setContentView(R.layout.activityhamster);
 		
 		TextView titleView = (TextView) findViewById(R.id.hamsterTitle);
+		TextView descView = (TextView) findViewById(R.id.hamsterDescription);
+		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		
 		Intent intent = getIntent();
 		String title = intent.getStringExtra(TAG_TITLE);
+		String description = intent.getStringExtra(TAG_DESCRIPTION);
+		String imageUrl = intent.getStringExtra(TAG_IMAGE);
+		imageView.setImageBitmap(GetImage.getRemoteImage(imageUrl));
 		
 		titleView.setText(title);
+		descView.setText(description);
 	}
 
 	@Override

@@ -3,11 +3,9 @@ package com.example.unrealmojo.test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,7 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
+
 
 public class MainActivity extends Activity {
         private static final String TAG_TITLE = "title";
@@ -94,7 +92,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
             } else {
-                Log.e("ServiceHandler", "Couldn't get any data from the url");
+                Log.e("ServiceHandler", "Couldn't get any data from server");
             }
  
             return null;
@@ -133,7 +131,7 @@ public class MainActivity extends Activity {
                 		intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE).toString());
                 		intent.putExtra(TAG_DESCRIPTION, currentItem.get(TAG_DESCRIPTION).toString());
                 		intent.putExtra(TAG_IMAGE, currentItem.get(TAG_IMAGE).toString());
-                		intent.putExtra(TAG_PINNED, currentItem.get(TAG_PINNED).toString());
+                		//intent.putExtra(TAG_PINNED, currentItem.get(TAG_PINNED).toString());
                 		
                 		startActivity(intent);
 
