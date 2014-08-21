@@ -1,6 +1,5 @@
 package com.example.unrealmojo.test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,16 +10,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
-public class MainActivity extends Activity 
-{
+public class MainActivity extends Activity {
         private static final String TAG_TITLE = "title";
         private static final String TAG_DESCRIPTION = "description";
         private static final String TAG_IMAGE = "image";
@@ -64,7 +64,7 @@ public class MainActivity extends Activity
 
             String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
  
-            Log.d("jsonStr: ", "> " + jsonStr);
+            //Log.d("jsonStr: ", "> " + jsonStr);
  
             if (jsonStr != null) {
             	
@@ -114,15 +114,37 @@ public class MainActivity extends Activity
                     TAG_DESCRIPTION,
                     TAG_IMAGE
                     }, new int[]{
-                    R.id.text1,
+                    R.id.textField1,
                     R.id.text2,
                     R.id.img});
 
             	listView.setAdapter(adapter);
-            	listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE); 
+            	listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        
+            	listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+                	@Override
+                	public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                			long id) {
+                		
+                		Intent intent = new Intent(MainActivity.this, HamsterActivity.class);
+                		Map currentItem = new HashMap<String, String>();
+                		currentItem = (Map) parent.getItemAtPosition(position);
+                		
+                		intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE).toString());
+                		intent.putExtra(TAG_DESCRIPTION, currentItem.get(TAG_DESCRIPTION).toString());
+                		intent.putExtra(TAG_IMAGE, currentItem.get(TAG_IMAGE).toString());
+                		intent.putExtra(TAG_PINNED, currentItem.get(TAG_PINNED).toString());
+                		
+                		startActivity(intent);
+
+                	}
+
+                });
+            	
         }
- 
+        
     }
+    
 }
 
 //package com.example.unrealmojo.test;

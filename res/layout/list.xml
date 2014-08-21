@@ -17,9 +17,10 @@
   
   <TextView android:layout_width="fill_parent"
   android:layout_height="wrap_content"
-  android:id="@+id/text1"
+  android:id="@+id/textField1"
   android:textSize="25sp"
   android:singleLine="true"
+  android:textColor="#FFFFFF"
   android:text="This is text1"/>
   
   <TextView android:layout_width="fill_parent"
