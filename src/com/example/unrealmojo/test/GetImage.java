@@ -22,7 +22,7 @@ public class GetImage {
 
 	        return bm;
 	    } catch (IOException e) {
-	        Log.d("Your tag here", "Connection error");
+	        Log.d("myTAG", "Connection error");
 	    }
 	    return null;
 	}
