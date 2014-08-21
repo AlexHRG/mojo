@@ -1,5 +1,6 @@
 package com.example.unrealmojo.test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,14 +78,17 @@ public class MainActivity extends Activity
                     		hamster_data.put(TAG_TITLE, jsonObject.getString(TAG_TITLE));
                     		hamster_data.put(TAG_DESCRIPTION, jsonObject.getString(TAG_DESCRIPTION));
                     		hamster_data.put(TAG_IMAGE, jsonObject.getString(TAG_IMAGE));
-                    		//hamster_data.put(TAG_PINNED, (jsonObject.get(TAG_PINNED) == null ? "0" : "1"));
                     		
-                    		Log.d(TAG, hamster_data.toString());
+                    		String pinned = null;
+                    		try{
+                    			pinned = jsonObject.get(TAG_PINNED) == null ? "0" : "1";
+                    		} catch (JSONException e) {
+                    			pinned = "0";
+                    		}
+                    		hamster_data.put(TAG_PINNED, pinned);
                     		
                     		hamster_list.add((HashMap<String, String>) hamster_data);
                     	}
-                    	
-                    	Log.d(TAG, "list size = " + hamster_list.size());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
