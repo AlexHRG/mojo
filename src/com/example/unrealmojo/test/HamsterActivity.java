@@ -1,10 +1,14 @@
 package com.example.unrealmojo.test;
 
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -31,9 +35,20 @@ public class HamsterActivity extends Activity {
 		String imageUrl = intent.getStringExtra(TAG_IMAGE);
 		imageView.setImageBitmap(GetImage.getRemoteImage(imageUrl));
 		
+//		try {
+//			imageView.setImageDrawable(grabImageFromUrl(imageUrl));
+//		} catch (Exception e) {
+//			Log.d("myTAG", "Image downloading error");
+//		}
+		
 		titleView.setText(title);
 		descView.setText(description);
 	}
+	
+//	private Drawable grabImageFromUrl(String url) throws Exception {
+//		return Drawable.createFromStream(
+//				(InputStream) new URL(url).getContent(), "src");
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
