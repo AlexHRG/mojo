@@ -1,12 +1,8 @@
 package com.example.unrealmojo.test;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,8 +13,8 @@ import android.widget.TextView;
 public class HamsterActivity extends Activity {
 	private static final String TAG_TITLE = "title";
     private static final String TAG_DESCRIPTION = "description";
-    private static final String TAG_IMAGE = "image";
-    private static final String TAG_PINNED = "pinned";
+    private static final String TAG_IMAGEURL = "image";
+    private static final String TAG_PICTURE = "picture";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +28,8 @@ public class HamsterActivity extends Activity {
 		Intent intent = getIntent();
 		String title = intent.getStringExtra(TAG_TITLE);
 		String description = intent.getStringExtra(TAG_DESCRIPTION);
-		String imageUrl = intent.getStringExtra(TAG_IMAGE);
-		imageView.setImageBitmap(GetImage.getRemoteImage(imageUrl));
+		//String imageUrl = intent.getStringExtra(TAG_IMAGEURL);
+		imageView.setImageBitmap((Bitmap)intent.getParcelableExtra(TAG_PICTURE));
 		
 //		try {
 //			imageView.setImageDrawable(grabImageFromUrl(imageUrl));

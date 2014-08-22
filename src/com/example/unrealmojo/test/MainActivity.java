@@ -1,14 +1,20 @@
 package com.example.unrealmojo.test;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +27,15 @@ import android.widget.SimpleAdapter;
 public class MainActivity extends Activity {
         private static final String TAG_TITLE = "title";
         private static final String TAG_DESCRIPTION = "description";
-        private static final String TAG_IMAGE = "image";
+        private static final String TAG_IMAGEURL = "image";
+        private static final String TAG_PICTURE = "picture";
         private static final String TAG_PINNED = "pinned";
-        private static final String TAG = "myLog";
+        private static final String LOG_TAG = "myLog";
         private static String url = "http://unrealmojo.com/porn/test3";
         private ProgressDialog pDialog;
+        private Bitmap picture;
         JSONArray hamsters = null;
-        ArrayList<HashMap<String, String>> hamster_list = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String, Object>> hamster_list = new ArrayList<HashMap<String, Object>>();
         ListView listView;
 
         
@@ -69,13 +77,20 @@ public class MainActivity extends Activity {
             	
                 try {
                     JSONArray jsonArray = new JSONArray(jsonStr);
-                    	for (int i = 0; i < jsonArray.length(); i++){
+                    	for (int i = 0; i < 5; i++){
                     		JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    		Map hamster_data = new HashMap<String, String>();
+                    		Map hamster_data = new HashMap<String, Object>();
+                    		String imageUrl = jsonObject.getString(TAG_IMAGEURL);
                     		
                     		hamster_data.put(TAG_TITLE, jsonObject.getString(TAG_TITLE));
                     		hamster_data.put(TAG_DESCRIPTION, jsonObject.getString(TAG_DESCRIPTION));
-                    		hamster_data.put(TAG_IMAGE, jsonObject.getString(TAG_IMAGE));
+                    		//hamster_data.put(TAG_IMAGEURL, imageUrl);
+                    		try {
+								hamster_data.put(TAG_PICTURE, ImageDownloader.getRemoteImage(imageUrl));
+							} catch (Exception e1) {
+								Log.d(LOG_TAG, "Image downloading error");
+								e1.printStackTrace();
+							}
                     		
                     		String pinned = null;
                     		try{
@@ -85,7 +100,7 @@ public class MainActivity extends Activity {
                     		}
                     		hamster_data.put(TAG_PINNED, pinned);
                     		
-                    		hamster_list.add((HashMap<String, String>) hamster_data);
+                    		hamster_list.add((HashMap<String, Object>) hamster_data);
                     	}
 
                 } catch (JSONException e) {
@@ -110,11 +125,11 @@ public class MainActivity extends Activity {
                     R.layout.list, new String[]{
                     TAG_TITLE,
                     TAG_DESCRIPTION,
-                    TAG_IMAGE
+                    TAG_PICTURE
                     }, new int[]{
-                    R.id.textField1,
-                    R.id.text2,
-                    R.id.img});
+                    R.id.listTitle,
+                    R.id.listDescription,
+                    R.id.listImage});
 
             	listView.setAdapter(adapter);
             	listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -125,13 +140,12 @@ public class MainActivity extends Activity {
                 			long id) {
                 		
                 		Intent intent = new Intent(MainActivity.this, HamsterActivity.class);
-                		Map currentItem = new HashMap<String, String>();
+                		Map currentItem = new HashMap<String, Object>();
                 		currentItem = (Map) parent.getItemAtPosition(position);
                 		
                 		intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE).toString());
                 		intent.putExtra(TAG_DESCRIPTION, currentItem.get(TAG_DESCRIPTION).toString());
-                		intent.putExtra(TAG_IMAGE, currentItem.get(TAG_IMAGE).toString());
-                		//intent.putExtra(TAG_PINNED, currentItem.get(TAG_PINNED).toString());
+                		intent.putExtra(TAG_PICTURE, (Bitmap) currentItem.get(TAG_PICTURE));
                 		
                 		startActivity(intent);
 

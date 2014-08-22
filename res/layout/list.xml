@@ -5,29 +5,34 @@
   android:orientation="horizontal"
   android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="55sp"
-        android:layout_height="fill_parent" />
+   <ImageView
+       android:id="@+id/listImage"
+       android:layout_width="82dp"
+       android:layout_height="fill_parent"
+       android:contentDescription="@string/imageViewDescription"
+       android:scaleType="centerInside"
+       android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
 
   <LinearLayout
-  android:layout_width="265dip"
-  android:orientation="vertical"
-  android:layout_height="wrap_content">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical" >
   
-  <TextView android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  android:id="@+id/textField1"
-  android:textSize="25sp"
-  android:singleLine="true"
-  android:textColor="#FFFFFF"
-  android:text="This is text1"/>
+  <TextView
+      android:id="@+id/listTitle"
+      android:layout_width="227dp"
+      android:layout_height="wrap_content"
+      android:singleLine="true"
+      android:text="This is text1"
+      android:textColor="#FFFFFF"
+      android:textSize="25sp" />
   
-  <TextView android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  android:id="@+id/text2"
-  android:text="This is text2"
-  android:singleLine="true"/>
+  <TextView
+      android:id="@+id/listDescription"
+      android:layout_width="233dp"
+      android:layout_height="wrap_content"
+      android:singleLine="true"
+      android:text="This is text2" />
   
   </LinearLayout>
 </LinearLayout>
