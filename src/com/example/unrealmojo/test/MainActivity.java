@@ -29,8 +29,8 @@ public class MainActivity extends Activity {
 	private static final String TAG_PINNED = "pinned";
 	private static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
+	private static String myFolder = "/myTestFolder";
 	private ProgressDialog pDialog;
-	JSONArray hamsters = null;
 	ArrayList<Map<String, Object>> hamster_list = new ArrayList<Map<String, Object>>();
 	ListView listView;
 
@@ -56,7 +56,6 @@ public class MainActivity extends Activity {
 
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		protected Void doInBackground(Void... arg0) {
 
@@ -69,10 +68,9 @@ public class MainActivity extends Activity {
 				try {
 					JSONArray jsonArray = new JSONArray(jsonStr);
 
-					String newFolder = "/myTestFolder";
 					String extStorageDirectory = Environment
 							.getExternalStorageDirectory().toString();
-					File myNewFolder = new File(extStorageDirectory + newFolder);
+					File myNewFolder = new File(extStorageDirectory + myFolder);
 					try {
 						myNewFolder.mkdir();
 					} catch (Exception ex) {
@@ -82,7 +80,7 @@ public class MainActivity extends Activity {
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-						Map hamster_data = new HashMap<String, Object>();
+						Map<String, Object> hamster_data = new HashMap<String, Object>();
 						String imageUrl = jsonObject.getString(TAG_IMAGEURL);
 
 						hamster_data.put(TAG_TITLE,
@@ -134,14 +132,15 @@ public class MainActivity extends Activity {
 			listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+				@SuppressWarnings("unchecked")
 				@Override
 				public void onItemClick(AdapterView<?> parent,
 						View itemClicked, int position, long id) {
 
 					Intent intent = new Intent(MainActivity.this,
 							HamsterActivity.class);
-					Map currentItem = new HashMap<String, Object>();
-					currentItem = (Map) parent.getItemAtPosition(position);
+					Map<String, Object> currentItem = new HashMap<String, Object>();
+					currentItem = (Map<String, Object>) parent.getItemAtPosition(position);
 					String imagePath = null;
 					try {
 						imagePath = currentItem.get(TAG_IMAGEFILE).toString();
