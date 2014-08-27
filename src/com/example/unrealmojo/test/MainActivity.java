@@ -41,17 +41,17 @@ public class MainActivity extends Activity {
 
 		listView = (ListView) findViewById(android.R.id.list);
 
-		new GetContacts().execute();
+		new GetHamsters().execute();
 	}
 
-	private class GetContacts extends AsyncTask<Void, Void, Void> {
+	private class GetHamsters extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(MainActivity.this);
 			pDialog.setMessage("Please wait...");
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
 			pDialog.show();
 
 		}
