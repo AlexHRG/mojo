@@ -2,6 +2,7 @@ package com.example.unrealmojo.test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,6 +104,8 @@ public class MainActivity extends Activity {
 
 						hamster_list
 								.add((HashMap<String, Object>) hamster_data);
+						
+						Collections.sort(hamster_list, new HamsterComparator());
 					}
 
 				} catch (JSONException e) {

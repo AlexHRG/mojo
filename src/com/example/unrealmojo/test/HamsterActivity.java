@@ -20,7 +20,7 @@ public class HamsterActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activityhamster);
+		setContentView(R.layout.activity_hamster);
 		
 		TextView titleView = (TextView) findViewById(R.id.hamsterTitle);
 		TextView descView = (TextView) findViewById(R.id.hamsterDescription);
