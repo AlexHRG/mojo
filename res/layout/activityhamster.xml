@@ -24,6 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:textSize="25sp"
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -46,6 +47,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/hamsterTitle"
             android:layout_below="@+id/imageView1"
+            android:textSize="18sp"
             android:text="TextView" />
     </RelativeLayout>
 
