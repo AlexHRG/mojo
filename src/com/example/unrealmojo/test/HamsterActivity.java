@@ -3,6 +3,7 @@ package com.example.unrealmojo.test;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HamsterActivity extends Activity {
-	private static final String TAG_TITLE = "title";
-    private static final String TAG_DESCRIPTION = "description";
-    private static final String TAG_IMAGEURL = "image";
-    private static final String TAG_PICTURE = "picture";
+	 private static final String TAG_TITLE = "title";
+     private static final String TAG_DESCRIPTION = "description";
+     private static final String TAG_IMAGEFILE = "imageFile";
+     private static final String LOG_TAG = "myLog";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,36 +29,24 @@ public class HamsterActivity extends Activity {
 		Intent intent = getIntent();
 		String title = intent.getStringExtra(TAG_TITLE);
 		String description = intent.getStringExtra(TAG_DESCRIPTION);
-		//String imageUrl = intent.getStringExtra(TAG_IMAGEURL);
-		imageView.setImageBitmap((Bitmap)intent.getParcelableExtra(TAG_PICTURE));
-		
-//		try {
-//			imageView.setImageDrawable(grabImageFromUrl(imageUrl));
-//		} catch (Exception e) {
-//			Log.d("myTAG", "Image downloading error");
-//		}
-		
+		String imagePath = intent.getStringExtra(TAG_IMAGEFILE);
+		if (imagePath != "NONE"){
+			Bitmap image = BitmapFactory.decodeFile(imagePath);
+			imageView.setImageBitmap(image);	
+		}
+
 		titleView.setText(title);
 		descView.setText(description);
 	}
 	
-//	private Drawable grabImageFromUrl(String url) throws Exception {
-//		return Drawable.createFromStream(
-//				(InputStream) new URL(url).getContent(), "src");
-//	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.hamster, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;

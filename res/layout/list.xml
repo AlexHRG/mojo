@@ -7,7 +7,7 @@
 
    <ImageView
        android:id="@+id/listImage"
-       android:layout_width="82dp"
+       android:layout_width="80dp"
        android:layout_height="fill_parent"
        android:contentDescription="@string/imageViewDescription"
        android:scaleType="centerInside"
@@ -20,19 +20,17 @@
   
   <TextView
       android:id="@+id/listTitle"
-      android:layout_width="227dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:singleLine="true"
-      android:text="This is text1"
       android:textColor="#FFFFFF"
-      android:textSize="25sp" />
+      android:textSize="20sp" />
   
   <TextView
       android:id="@+id/listDescription"
-      android:layout_width="233dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:singleLine="true"
-      android:text="This is text2" />
+      android:singleLine="true" />
   
   </LinearLayout>
 </LinearLayout>
