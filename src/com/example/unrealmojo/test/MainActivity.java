@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 	private static String myFolderName = "/UnrealMojo";
 	private static String myFileName = "mojo";
 	private ProgressDialog pDialog;
-	ArrayList<Map<String, Object>> hamster_list = new ArrayList<Map<String, Object>>();
+	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	ListView listView;
 
 	@Override
@@ -82,7 +82,8 @@ public class MainActivity extends Activity {
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-						Map<String, Object> hamster_data = new HashMap<String, Object>();
+						Map<String, String> hamster_data = new HashMap<String, String>();
+												
 						String imageUrl = jsonObject.getString(TAG_IMAGEURL);
 
 						hamster_data.put(TAG_TITLE,
@@ -104,7 +105,7 @@ public class MainActivity extends Activity {
 						hamster_data.put(TAG_PINNED, pinned);
 
 						hamster_list
-								.add((HashMap<String, Object>) hamster_data);
+								.add((HashMap<String, String>) hamster_data);
 						
 						Collections.sort(hamster_list, new HamsterComparator());
 					}
@@ -143,18 +144,17 @@ public class MainActivity extends Activity {
 
 					Intent intent = new Intent(MainActivity.this,
 							HamsterActivity.class);
-					Map<String, Object> currentItem = new HashMap<String, Object>();
-					currentItem = (Map<String, Object>) parent.getItemAtPosition(position);
+					Map<String, String> currentItem = new HashMap<String, String>();
+					currentItem = (Map<String, String>) parent.getItemAtPosition(position);
 					String imagePath = null;
 					try {
-						imagePath = currentItem.get(TAG_IMAGEFILE).toString();
+						imagePath = currentItem.get(TAG_IMAGEFILE);
 					} catch (NullPointerException e) {
 						imagePath = "NONE";
 					} finally {
-						intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE)
-								.toString());
+						intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE));
 						intent.putExtra(TAG_DESCRIPTION,
-								currentItem.get(TAG_DESCRIPTION).toString());
+								currentItem.get(TAG_DESCRIPTION));
 						intent.putExtra(TAG_IMAGEFILE, imagePath);
 					}
 					startActivity(intent);
