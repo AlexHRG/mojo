@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class HamsterActivity extends Activity {
 	 private static final String TAG_TITLE = "title";
      private static final String TAG_DESCRIPTION = "description";
-     private static final String TAG_IMAGEFILE = "imageFile";
+     private static final String TAG_IMAGEPATH = "imagePath";
      private static final String LOG_TAG = "myLog";
 
 	@Override
@@ -29,7 +29,7 @@ public class HamsterActivity extends Activity {
 		Intent intent = getIntent();
 		String title = intent.getStringExtra(TAG_TITLE);
 		String description = intent.getStringExtra(TAG_DESCRIPTION);
-		String imagePath = intent.getStringExtra(TAG_IMAGEFILE);
+		String imagePath = intent.getStringExtra(TAG_IMAGEPATH);
 		if (imagePath != "NONE"){
 			Bitmap image = BitmapFactory.decodeFile(imagePath);
 			imageView.setImageBitmap(image);	

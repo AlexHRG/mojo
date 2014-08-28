@@ -26,8 +26,9 @@ public class MainActivity extends Activity {
 	private static final String TAG_TITLE = "title";
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_IMAGEURL = "image";
-	private static final String TAG_IMAGEFILE = "imageFile";
+	private static final String TAG_IMAGEPATH = "imagePath";
 	private static final String TAG_PINNED = "pinned";
+	private static final String TAG_NONE = "none";
 	private static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
 	private static String myFolderName = "/UnrealMojo";
@@ -83,25 +84,47 @@ public class MainActivity extends Activity {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 						Map<String, String> hamster_data = new HashMap<String, String>();
-												
-						String imageUrl = jsonObject.getString(TAG_IMAGEURL);
-
-						hamster_data.put(TAG_TITLE,
-								jsonObject.getString(TAG_TITLE));
-						hamster_data.put(TAG_DESCRIPTION,
-								jsonObject.getString(TAG_DESCRIPTION));
-						hamster_data.put(TAG_IMAGEURL, imageUrl);
-						hamster_data.put(TAG_IMAGEFILE, ImageDownloader
-								.loadImageToDisc(imageUrl,
-										String.format("%s/%s%d", myFilePath.toString(), myFileName, i)));
-
+						String title = null;
+						String description = null;
+						String imageUrl = null;
+						String imagePath = null;
 						String pinned = null;
+						
+						try{
+							title = jsonObject.getString(TAG_TITLE);
+						} catch (JSONException e){
+							title = TAG_NONE;
+						}
+						
+						try{
+							description = jsonObject.getString(TAG_DESCRIPTION);
+						} catch (JSONException e){
+							description = TAG_NONE;
+						}
+						
+						try{
+							imageUrl = jsonObject.getString(TAG_IMAGEURL);
+						} catch (JSONException e){
+							imageUrl = TAG_NONE;
+						}
+						
+						try{
+							imagePath = ImageDownloader.loadImageToDisc(imageUrl,
+									String.format("%s/%s%d", myFilePath.toString(), myFileName, i));
+						} catch (Exception e){
+							imagePath = TAG_NONE;
+						}
+						
 						try {
 							pinned = jsonObject.get(TAG_PINNED) == null ? "0"
 									: "1";
 						} catch (JSONException e) {
 							pinned = "0";
 						}
+						
+						hamster_data.put(TAG_TITLE, title);
+						hamster_data.put(TAG_DESCRIPTION, description);
+						hamster_data.put(TAG_IMAGEPATH, imagePath);
 						hamster_data.put(TAG_PINNED, pinned);
 
 						hamster_list
@@ -129,7 +152,7 @@ public class MainActivity extends Activity {
 
 			SimpleAdapter adapter = new SimpleAdapter(MainActivity.this,
 					hamster_list, R.layout.list, new String[] { TAG_TITLE,
-							TAG_DESCRIPTION, TAG_IMAGEFILE }, new int[] {
+							TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
 							R.id.listTitle, R.id.listDescription,
 							R.id.listImage });
 
@@ -144,19 +167,14 @@ public class MainActivity extends Activity {
 
 					Intent intent = new Intent(MainActivity.this,
 							HamsterActivity.class);
-					Map<String, String> currentItem = new HashMap<String, String>();
-					currentItem = (Map<String, String>) parent.getItemAtPosition(position);
-					String imagePath = null;
-					try {
-						imagePath = currentItem.get(TAG_IMAGEFILE);
-					} catch (NullPointerException e) {
-						imagePath = "NONE";
-					} finally {
-						intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE));
-						intent.putExtra(TAG_DESCRIPTION,
-								currentItem.get(TAG_DESCRIPTION));
-						intent.putExtra(TAG_IMAGEFILE, imagePath);
-					}
+					Map<String, String> currentItem = (Map<String, String>) parent.getItemAtPosition(position);
+					String imagePath = currentItem.get(TAG_IMAGEPATH);
+
+					intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE));
+					intent.putExtra(TAG_DESCRIPTION,
+							currentItem.get(TAG_DESCRIPTION));
+					intent.putExtra(TAG_IMAGEPATH, imagePath);
+					
 					startActivity(intent);
 
 				}
