@@ -15,6 +15,7 @@ public class HamsterActivity extends Activity {
 	 private static final String TAG_TITLE = "title";
      private static final String TAG_DESCRIPTION = "description";
      private static final String TAG_IMAGEPATH = "imagePath";
+     private static final String TAG_NONE = "none";
      private static final String LOG_TAG = "myLog";
 
 	@Override
@@ -30,11 +31,10 @@ public class HamsterActivity extends Activity {
 		String title = intent.getStringExtra(TAG_TITLE);
 		String description = intent.getStringExtra(TAG_DESCRIPTION);
 		String imagePath = intent.getStringExtra(TAG_IMAGEPATH);
-		if (imagePath != "NONE"){
+		if (imagePath != TAG_NONE){
 			Bitmap image = BitmapFactory.decodeFile(imagePath);
 			imageView.setImageBitmap(image);	
 		}
-
 		titleView.setText(title);
 		descView.setText(description);
 	}

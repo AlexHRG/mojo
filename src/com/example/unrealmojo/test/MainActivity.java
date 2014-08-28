@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
 			} else {
-				Log.e("ServiceHandler", "Couldn't get any data from server");
+				Log.d(LOG_TAG, "Couldn't get any data from server");
 			}
 
 			return null;
@@ -168,12 +168,10 @@ public class MainActivity extends Activity {
 					Intent intent = new Intent(MainActivity.this,
 							HamsterActivity.class);
 					Map<String, String> currentItem = (Map<String, String>) parent.getItemAtPosition(position);
-					String imagePath = currentItem.get(TAG_IMAGEPATH);
 
 					intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE));
-					intent.putExtra(TAG_DESCRIPTION,
-							currentItem.get(TAG_DESCRIPTION));
-					intent.putExtra(TAG_IMAGEPATH, imagePath);
+					intent.putExtra(TAG_DESCRIPTION,currentItem.get(TAG_DESCRIPTION));
+					intent.putExtra(TAG_IMAGEPATH, currentItem.get(TAG_IMAGEPATH));
 					
 					startActivity(intent);
 
