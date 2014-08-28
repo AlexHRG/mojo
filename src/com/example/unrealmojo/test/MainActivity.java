@@ -30,7 +30,8 @@ public class MainActivity extends Activity {
 	private static final String TAG_PINNED = "pinned";
 	private static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
-	private static String myFolder = "/myTestFolder";
+	private static String myFolderName = "/UnrealMojo";
+	private static String myFileName = "mojo";
 	private ProgressDialog pDialog;
 	ArrayList<Map<String, Object>> hamster_list = new ArrayList<Map<String, Object>>();
 	ListView listView;
@@ -71,9 +72,9 @@ public class MainActivity extends Activity {
 
 					String extStorageDirectory = Environment
 							.getExternalStorageDirectory().toString();
-					File myNewFolder = new File(extStorageDirectory + myFolder);
+					File myFilePath = new File(extStorageDirectory + myFolderName);
 					try {
-						myNewFolder.mkdir();
+						myFilePath.mkdir();
 					} catch (Exception ex) {
 						Log.d(LOG_TAG, ex.getMessage());
 					}
@@ -91,7 +92,7 @@ public class MainActivity extends Activity {
 						hamster_data.put(TAG_IMAGEURL, imageUrl);
 						hamster_data.put(TAG_IMAGEFILE, ImageDownloader
 								.loadImageToDisc(imageUrl,
-										myNewFolder.toString() + i));
+										String.format("%s/%s%d", myFilePath.toString(), myFileName, i)));
 
 						String pinned = null;
 						try {
