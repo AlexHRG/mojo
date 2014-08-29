@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,9 +44,23 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		listView = (ListView) findViewById(android.R.id.list);
-
+		
 		new GetHamsters().execute();
+
 	}
+	
+//	protected void onSaveInstanceState(Bundle outState) {
+//	    super.onSaveInstanceState(outState);
+//	    outState.putSerializable("hamsters", hamster_list);
+//	    Log.d(LOG_TAG, "onSaveInstanceState");
+//	  }
+//	
+//	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//	    super.onRestoreInstanceState(savedInstanceState);
+//	    hamster_list = (ArrayList<Map<String, String>>) savedInstanceState.getSerializable("hamsters");
+//	    Log.d(LOG_TAG, "onRestoreInstanceState");
+//	  }
+
 
 	private class GetHamsters extends AsyncTask<Void, Void, Void> {
 
