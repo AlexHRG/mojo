@@ -110,7 +110,7 @@ public class MainActivity extends Activity {
 						
 						try{
 							imagePath = ImageDownloader.loadImageToDisc(imageUrl,
-									String.format("%s/%s%d", myFilePath.toString(), myFileName, i));
+									String.format("%s/%s%d.jpg", myFilePath.toString(), myFileName, i));
 						} catch (Exception e){
 							imagePath = TAG_NONE;
 						}
