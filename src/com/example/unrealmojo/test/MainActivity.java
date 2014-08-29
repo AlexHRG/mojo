@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 	private static String myFolderName = "/UnrealMojo";
 	private static String myFileName = "mojo";
 	private ProgressDialog pDialog;
-	GetHamsters getHamsters;
 	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	ListView listView;
 
@@ -47,7 +46,7 @@ public class MainActivity extends Activity {
 
 		listView = (ListView) findViewById(android.R.id.list);
 		
-		getHamsters = new GetHamsters();
+		GetHamsters getHamsters = new GetHamsters();
 		
 		try {
 			hamster_list = getHamsters.execute().get();
@@ -105,7 +104,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			//super.onPreExecute();
+			super.onPreExecute();
 			pDialog = new ProgressDialog(MainActivity.this);
 			pDialog.setMessage("Please wait...");
 			pDialog.setCancelable(true);
@@ -130,11 +129,7 @@ public class MainActivity extends Activity {
 					String extStorageDirectory = Environment
 							.getExternalStorageDirectory().toString();
 					File myFilePath = new File(extStorageDirectory + myFolderName);
-					try {
-						myFilePath.mkdir();
-					} catch (Exception ex) {
-						Log.d(LOG_TAG, ex.getMessage());
-					}
+					myFilePath.mkdir();
 
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -146,45 +141,20 @@ public class MainActivity extends Activity {
 						String imagePath = null;
 						String pinned = null;
 						
-						try{
-							title = jsonObject.getString(TAG_TITLE);
-						} catch (JSONException e){
-							title = TAG_NONE;
-						}
-						
-						try{
-							description = jsonObject.getString(TAG_DESCRIPTION);
-						} catch (JSONException e){
-							description = TAG_NONE;
-						}
-						
-						try{
-							imageUrl = jsonObject.getString(TAG_IMAGEURL);
-						} catch (JSONException e){
-							imageUrl = TAG_NONE;
-						}
-						
-						try{
-							imagePath = ImageDownloader.loadImageToDisc(imageUrl,
+
+						title = jsonObject.getString(TAG_TITLE);
+						description = jsonObject.getString(TAG_DESCRIPTION);
+						imageUrl = jsonObject.getString(TAG_IMAGEURL);
+						imagePath = ImageDownloader.loadImageToDisc(imageUrl,
 									String.format("%s/%s%d.jpg", myFilePath.toString(), myFileName, i));
-						} catch (Exception e){
-							imagePath = TAG_NONE;
-						}
-						
-						try {
-							pinned = jsonObject.get(TAG_PINNED) == null ? "0"
-									: "1";
-						} catch (JSONException e) {
-							pinned = "0";
-						}
+						pinned = jsonObject.isNull(TAG_PINNED) ? "0" : "1";
 						
 						hamster_data.put(TAG_TITLE, title);
 						hamster_data.put(TAG_DESCRIPTION, description);
 						hamster_data.put(TAG_IMAGEPATH, imagePath);
 						hamster_data.put(TAG_PINNED, pinned);
 
-						hamster_list
-								.add((HashMap<String, String>) hamster_data);
+						hamster_list.add((HashMap<String, String>) hamster_data);
 						
 						Collections.sort(hamster_list, new HamsterComparator());
 						
@@ -192,6 +162,8 @@ public class MainActivity extends Activity {
 
 				} catch (JSONException e) {
 					e.printStackTrace();
+				} catch (Exception ex) {
+					Log.d(LOG_TAG, ex.getMessage());
 				}
 			} else {
 				Log.d(LOG_TAG, "Couldn't get any data from server");
