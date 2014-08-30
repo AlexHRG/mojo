@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 	
 //	protected void onSaveInstanceState(Bundle outState) {
 //	    super.onSaveInstanceState(outState);
-//	    outState.putParcelableArrayList("hamsters", (ArrayList<    ? extends Parcelable>) hamster_list);
+//	    outState.putSerializable("hamsters", hamster_list);
 //	    Log.d(LOG_TAG, "onSaveInstanceState");
 //	  }
 //	
