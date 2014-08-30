@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,6 +34,7 @@ public class MainActivity extends Activity {
 	private ProgressDialog pDialog;
 	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	ListView listView;
+	SimpleAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,24 +42,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		listView = (ListView) findViewById(android.R.id.list);
-		
-		GetHamsters getHamsters = new GetHamsters();
-		
-		try {
-			hamster_list = getHamsters.execute().get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		
-		SimpleAdapter adapter = new SimpleAdapter(MainActivity.this,
-				hamster_list, R.layout.list, new String[] { TAG_TITLE,
-						TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
-						R.id.listTitle, R.id.listDescription,
-						R.id.listImage });
 
-		listView.setAdapter(adapter);
+		HardTask ht = new HardTask();
+		ht.execute();
+
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -100,7 +83,7 @@ public class MainActivity extends Activity {
 //	  }
 
 
-	private class GetHamsters extends AsyncTask<Void, Void, ArrayList<Map<String, String>>> {
+	class HardTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected void onPreExecute() {
@@ -111,11 +94,10 @@ public class MainActivity extends Activity {
 			if (!pDialog.isShowing()){
 				pDialog.show();
 			}
-
 		}
 
 		@Override
-		protected ArrayList<Map<String, String>> doInBackground(Void... arg0) {
+		protected Void doInBackground(Void... arg0) {
 
 			ServiceHandler sh = new ServiceHandler();
 
@@ -169,14 +151,22 @@ public class MainActivity extends Activity {
 				Log.d(LOG_TAG, "Couldn't get any data from server");
 			}
 
-			return hamster_list;
+			return null;
 		}
 
-		protected void onPostExecute(ArrayList<Map<String, String>> result) {
+		@Override
+		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 
 			if (pDialog.isShowing())
 				pDialog.dismiss();
+			
+			adapter = new SimpleAdapter(MainActivity.this,
+					hamster_list, R.layout.list, new String[] { TAG_TITLE,
+							TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
+							R.id.listTitle, R.id.listDescription,
+							R.id.listImage });
+			listView.setAdapter(adapter);
 
 		}
 
