@@ -28,8 +28,7 @@ public class MainActivity extends Activity {
 	private static final String TAG_PINNED = "pinned";
 	private static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
-	private static String myFolderName = "/UnrealMojo";
-	private static String myFileName = "mojo";
+	private static String folderName = "/UnrealMojo";
 	private ProgressDialog pDialog;
 	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	ListView listView;
@@ -119,8 +118,8 @@ public class MainActivity extends Activity {
 
 					String extStorageDirectory = Environment
 							.getExternalStorageDirectory().toString();
-					File myFilePath = new File(extStorageDirectory + myFolderName);
-					myFilePath.mkdir();
+					File filePath = new File(extStorageDirectory + folderName);
+					filePath.mkdir();
 
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -130,14 +129,18 @@ public class MainActivity extends Activity {
 						String description = null;
 						String imageUrl = null;
 						String imagePath = null;
-						String pinned = null;
-						
+						String pinned = null;						
 
 						title = jsonObject.getString(TAG_TITLE);
 						description = jsonObject.getString(TAG_DESCRIPTION);
 						imageUrl = jsonObject.getString(TAG_IMAGEURL);
+						
+						String[] fileNameTokens = imageUrl.split("/");
+						int last = fileNameTokens.length - 1;
+						String fileName = fileNameTokens[last];
+						
 						imagePath = ImageDownloader.loadImageToDisc(imageUrl,
-									String.format("%s/%s%d.jpg", myFilePath.toString(), myFileName, i));
+									String.format("%s/%s", filePath.toString(), fileName));
 						pinned = jsonObject.isNull(TAG_PINNED) ? "0" : "1";
 						
 						hamster_data.put(TAG_TITLE, title);
