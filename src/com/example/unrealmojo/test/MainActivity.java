@@ -26,13 +26,11 @@ public class MainActivity extends Activity {
 	private static final String TAG_IMAGEURL = "image";
 	private static final String TAG_IMAGEPATH = "imagePath";
 	private static final String TAG_PINNED = "pinned";
-	private static final String TAG_NONE = "none";
 	private static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
 	private static String myFolderName = "/UnrealMojo";
 	private static String myFileName = "mojo";
 	private ProgressDialog pDialog;
-	private HardTask ht;
 	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	ListView listView;
 	SimpleAdapter adapter;
@@ -44,8 +42,11 @@ public class MainActivity extends Activity {
 
 		listView = (ListView) findViewById(android.R.id.list);
 
-		ht = new HardTask();
-		ht.execute();
+		if (savedInstanceState == null){
+			new HardTask().execute();
+		} else {
+			hamster_list = (ArrayList<Map<String, String>>) savedInstanceState.get("hamsters");
+		}
 		
 		adapter = new SimpleAdapter(MainActivity.this,
 				hamster_list, R.layout.list, new String[] { TAG_TITLE,
@@ -78,18 +79,18 @@ public class MainActivity extends Activity {
 
 	}
 	
-//	protected void onSaveInstanceState(Bundle outState) {
-//	    super.onSaveInstanceState(outState);
-//	    outState.putSerializable("hamsters", hamster_list);
-//	    Log.d(LOG_TAG, "onSaveInstanceState");
-//	  }
-//	
-//	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//	    super.onRestoreInstanceState(savedInstanceState);
-//	    hamster_list = (ArrayList<Map<String, String>>) savedInstanceState.get("hamsters");
-//	    ht.onPostExecute(null);
-//	    Log.d(LOG_TAG, "onRestoreInstanceState");
-//	  }
+	protected void onSaveInstanceState(Bundle outState) {
+	    super.onSaveInstanceState(outState);
+	    outState.putSerializable("hamsters", hamster_list);
+	    Log.d(LOG_TAG, "onSaveInstanceState");
+	    Log.d(LOG_TAG, "Saved array size = " + hamster_list.size());
+	  }
+	
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+	    super.onRestoreInstanceState(savedInstanceState);
+	    Log.d(LOG_TAG, "onRestoreInstanceState");
+	    Log.d(LOG_TAG, "Readed array size = " + hamster_list.size());
+	  }
 
 
 	class HardTask extends AsyncTask<Void, Void, Void> {
