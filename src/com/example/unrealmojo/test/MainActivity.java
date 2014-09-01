@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 	ListView listView;
 	SimpleAdapter adapter;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +59,7 @@ public class MainActivity extends Activity {
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-			@SuppressWarnings("unchecked")
+			
 			@Override
 			public void onItemClick(AdapterView<?> parent,
 					View itemClicked, int position, long id) {
@@ -82,14 +83,12 @@ public class MainActivity extends Activity {
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
 	    outState.putSerializable("hamsters", hamster_list);
-	    Log.d(LOG_TAG, "onSaveInstanceState");
-	    Log.d(LOG_TAG, "Saved array size = " + hamster_list.size());
+//	    Log.d(LOG_TAG, "onSaveInstanceState");
 	  }
 	
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 	    super.onRestoreInstanceState(savedInstanceState);
-	    Log.d(LOG_TAG, "onRestoreInstanceState");
-	    Log.d(LOG_TAG, "Readed array size = " + hamster_list.size());
+//	    Log.d(LOG_TAG, "onRestoreInstanceState");
 	  }
 
 
