@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 	private static String myFolderName = "/UnrealMojo";
 	private static String myFileName = "mojo";
 	private ProgressDialog pDialog;
+	private HardTask ht;
 	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	ListView listView;
 	SimpleAdapter adapter;
@@ -43,9 +44,16 @@ public class MainActivity extends Activity {
 
 		listView = (ListView) findViewById(android.R.id.list);
 
-		HardTask ht = new HardTask();
+		ht = new HardTask();
 		ht.execute();
-
+		
+		adapter = new SimpleAdapter(MainActivity.this,
+				hamster_list, R.layout.list, new String[] { TAG_TITLE,
+						TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
+						R.id.listTitle, R.id.listDescription,
+						R.id.listImage });
+		
+		listView.setAdapter(adapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -79,6 +87,7 @@ public class MainActivity extends Activity {
 //	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 //	    super.onRestoreInstanceState(savedInstanceState);
 //	    hamster_list = (ArrayList<Map<String, String>>) savedInstanceState.get("hamsters");
+//	    ht.onPostExecute(null);
 //	    Log.d(LOG_TAG, "onRestoreInstanceState");
 //	  }
 
@@ -161,13 +170,7 @@ public class MainActivity extends Activity {
 			if (pDialog.isShowing())
 				pDialog.dismiss();
 			
-			adapter = new SimpleAdapter(MainActivity.this,
-					hamster_list, R.layout.list, new String[] { TAG_TITLE,
-							TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
-							R.id.listTitle, R.id.listDescription,
-							R.id.listImage });
-			listView.setAdapter(adapter);
-
+			adapter.notifyDataSetChanged();
 		}
 
 	}
