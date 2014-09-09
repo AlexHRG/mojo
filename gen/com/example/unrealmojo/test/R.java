@@ -1262,6 +1262,7 @@ containing a value of this type.
         public static final int imageViewDescription=0x7f0a0011;
         public static final int refresh=0x7f0a0012;
         public static final int title_activity_hamster=0x7f0a0010;
+        public static final int wait=0x7f0a0016;
     }
     public static final class style {
         /** 

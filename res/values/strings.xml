@@ -10,5 +10,6 @@
     <string name="about">About</string>
     <string name="exit">Exit</string>
     <string name="back">Back</string>
+    <string name="wait">Please wait</string>
 
 </resources>

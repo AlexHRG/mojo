@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">unrealmojo.test</string>
+    <string name="hello_world">Драсьте!</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_hamster">HamsterActivity</string>
+    <string name="imageViewDescription">Картинка</string>
+    <string name="refresh">Обновить</string>
+    <string name="about">Информация</string>
+    <string name="exit">Выход</string>
+    <string name="back">Назад</string>
+    <string name="wait">Подождите, пожалуйста</string>
+
+</resources>

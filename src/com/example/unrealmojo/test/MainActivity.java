@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 	private ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	private ListView listView;
 	private SimpleAdapter adapter;
-	private String about = "UnrealMojo test task\nversion pre release\nMade by HIRURG";
+	private String about = "UnrealMojo test task\nversion: pre release\nAuthor: HIRURG";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(MainActivity.this);
-			pDialog.setMessage("Please wait...");
+			pDialog.setMessage(getResources().getString(R.string.wait));
 			pDialog.setCancelable(true);
 			if (!pDialog.isShowing()){
 				pDialog.show();
