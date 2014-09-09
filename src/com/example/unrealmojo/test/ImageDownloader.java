@@ -11,9 +11,8 @@ public class ImageDownloader {
 	    try {
 	        InputStream is = (InputStream) new URL(url).getContent();
 
-	        System.out.println(path);
+	        //System.out.println(path);
 	        File f = new File(path);
-
 	        f.createNewFile();
 	        
 	        @SuppressWarnings("resource")
