@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_hamster">HamsterActivity</string>
     <string name="imageViewDescription">Image</string>
+    <string name="refresh">Refresh</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
 
 </resources>

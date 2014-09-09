@@ -15,10 +15,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static final String TAG_TITLE = "title";
@@ -78,6 +81,32 @@ public class MainActivity extends Activity {
 		});
 
 	}
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	getMenuInflater().inflate(R.menu.main, menu);
+      
+      return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.refresh:
+        	hamster_list.clear();
+            this.onCreate(null);
+            return true;
+        case R.id.about:
+            Toast.makeText(this, "UnrealMojo test task\nversion 0.9\nMade by HIRURG", Toast.LENGTH_LONG).show();
+            return true;
+        case R.id.exit:
+            System.exit(0);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    
 	
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
