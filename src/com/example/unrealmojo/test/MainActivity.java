@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,9 +34,10 @@ public class MainActivity extends Activity {
 	private static String url = "http://unrealmojo.com/porn/test3";
 	private static String folderName = "/UnrealMojo";
 	private ProgressDialog pDialog;
-	ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
-	ListView listView;
-	SimpleAdapter adapter;
+	private ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
+	private ListView listView;
+	private SimpleAdapter adapter;
+	private String about = "UnrealMojo test task\nversion 0.9\nMade by HIRURG";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -81,7 +83,7 @@ public class MainActivity extends Activity {
 		});
 
 	}
-    
+	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	getMenuInflater().inflate(R.menu.main, menu);
@@ -97,7 +99,7 @@ public class MainActivity extends Activity {
             this.onCreate(null);
             return true;
         case R.id.about:
-            Toast.makeText(this, "UnrealMojo test task\nversion 0.9\nMade by HIRURG", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, about, Toast.LENGTH_LONG).show();
             return true;
         case R.id.exit:
             System.exit(0);
