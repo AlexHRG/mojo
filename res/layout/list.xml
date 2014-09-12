@@ -24,13 +24,13 @@
       android:layout_height="35dp"
       android:singleLine="true"
       android:textColor="#FFFFFF"
-      android:textSize="20sp" />
+      android:textSize="22sp" />
   
   <TextView
       android:id="@+id/listDescription"
       android:layout_width="match_parent"
       android:layout_height="35dp"
-      android:singleLine="true" />
+      android:lines="2" />
   
   </LinearLayout>
 </LinearLayout>
