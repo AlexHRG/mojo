@@ -9,7 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,7 +23,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static final String TAG_TITLE = "title";
@@ -36,7 +37,9 @@ public class MainActivity extends Activity {
 	private ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
 	private ListView listView;
 	private SimpleAdapter adapter;
-	private String about = "UnrealMojo test task\nversion: pre release\nAuthor: HIRURG";
+	private String aboutTitle = "UnrealMojo test task";
+	private String aboutVersion = "pre release";
+	private String aboutAuthor = "HIRURG";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -98,7 +101,7 @@ public class MainActivity extends Activity {
             this.onCreate(null);
             return true;
         case R.id.about:
-            Toast.makeText(this, about, Toast.LENGTH_LONG).show();
+            showInfo();
             return true;
         case R.id.exit:
             System.exit(0);
@@ -108,7 +111,26 @@ public class MainActivity extends Activity {
         }
     }
     
-	
+	private void showInfo(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		String info_line = String.format("%s: %s\n%s: %s\n%s: %s",
+				getResources().getString(R.string.program_title), aboutTitle,
+				getResources().getString(R.string.pogram_version), aboutVersion,
+				getResources().getString(R.string.program_author), aboutAuthor);
+		
+		builder.setTitle(R.string.info)
+				.setMessage(info_line)
+				.setCancelable(true)
+				.setNegativeButton(R.string.ok,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+    
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
 	    outState.putSerializable("hamsters", hamster_list);

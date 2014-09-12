@@ -11,5 +11,10 @@
     <string name="exit">Выход</string>
     <string name="back">Назад</string>
     <string name="wait">Подождите, пожалуйста</string>
+    <string name="info">Информация</string>
+    <string name="ok">ОК</string>
+    <string name="program_title">Название</string>
+    <string name="pogram_version">Версия</string>
+    <string name="program_author">Автор</string>
 
 </resources>

@@ -11,5 +11,10 @@
     <string name="exit">Exit</string>
     <string name="back">Back</string>
     <string name="wait">Please wait</string>
+    <string name="info">Information</string>
+    <string name="ok">OK</string>
+    <string name="program_title">Title</string>
+    <string name="pogram_version">Version</string>
+    <string name="program_author">Author</string>
 
 </resources>

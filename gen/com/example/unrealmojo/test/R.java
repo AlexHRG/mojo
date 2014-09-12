@@ -1260,6 +1260,11 @@ containing a value of this type.
         public static final int exit=0x7f0a0014;
         public static final int hello_world=0x7f0a000e;
         public static final int imageViewDescription=0x7f0a0011;
+        public static final int info=0x7f0a0017;
+        public static final int ok=0x7f0a0018;
+        public static final int pogram_version=0x7f0a001a;
+        public static final int program_author=0x7f0a001b;
+        public static final int program_title=0x7f0a0019;
         public static final int refresh=0x7f0a0012;
         public static final int title_activity_hamster=0x7f0a0010;
         public static final int wait=0x7f0a0016;
