@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Map;
 
 
-public class HamsterComparator implements Comparator<Map<String, String>> {
+public class ItemComparator implements Comparator<Map<String, String>> {
 	private static final String TAG_TITLE = "title";
 	private static final String TAG_PINNED = "pinned";
 

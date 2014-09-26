@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 	private static String url = "http://unrealmojo.com/porn/test3";
 	private static String folderName = "/UnrealMojo";
 	private ProgressDialog pDialog;
-	private ArrayList<Map<String, String>> hamster_list = new ArrayList<Map<String, String>>();
+	private ArrayList<Map<String, String>> item_list = new ArrayList<Map<String, String>>();
 	private ListView listView;
 	private SimpleAdapter adapter;
 	private String aboutTitle = "UnrealMojo test task";
@@ -52,11 +52,11 @@ public class MainActivity extends Activity {
 		if (savedInstanceState == null){
 			new HardTask().execute();
 		} else {
-			hamster_list = (ArrayList<Map<String, String>>) savedInstanceState.get("hamsters");
+			item_list = (ArrayList<Map<String, String>>) savedInstanceState.get("hamsters");
 		}
 		
 		adapter = new SimpleAdapter(MainActivity.this,
-				hamster_list, R.layout.list, new String[] { TAG_TITLE,
+				item_list, R.layout.list, new String[] { TAG_TITLE,
 						TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
 						R.id.listTitle, R.id.listDescription,
 						R.id.listImage });
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 					View itemClicked, int position, long id) {
 
 				Intent intent = new Intent(MainActivity.this,
-						HamsterActivity.class);
+						DetailActivity.class);
 				Map<String, String> currentItem = (Map<String, String>) parent.getItemAtPosition(position);
 
 				intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE));
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.refresh:
-        	hamster_list.clear();
+        	item_list.clear();
             this.onCreate(null);
             return true;
         case R.id.about:
@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
     
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
-	    outState.putSerializable("hamsters", hamster_list);
+	    outState.putSerializable("hamsters", item_list);
 	  }
 	
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-						Map<String, String> hamster_data = new HashMap<String, String>();
+						Map<String, String> item_data = new HashMap<String, String>();
 						String title = null;
 						String description = null;
 						String imageUrl = null;
@@ -191,16 +191,17 @@ public class MainActivity extends Activity {
 						
 						imagePath = ImageDownloader.loadImageToDisc(imageUrl,
 									String.format("%s/%s", filePath.toString(), fileName));
+						
 						pinned = jsonObject.isNull(TAG_PINNED) ? "0" : "1";
 						
-						hamster_data.put(TAG_TITLE, title);
-						hamster_data.put(TAG_DESCRIPTION, description);
-						hamster_data.put(TAG_IMAGEPATH, imagePath);
-						hamster_data.put(TAG_PINNED, pinned);
+						item_data.put(TAG_TITLE, title);
+						item_data.put(TAG_DESCRIPTION, description);
+						item_data.put(TAG_IMAGEPATH, imagePath);
+						item_data.put(TAG_PINNED, pinned);
 
-						hamster_list.add((HashMap<String, String>) hamster_data);
+						item_list.add((HashMap<String, String>) item_data);
 						
-						Collections.sort(hamster_list, new HamsterComparator());
+						Collections.sort(item_list, new ItemComparator());
 						
 					}
 

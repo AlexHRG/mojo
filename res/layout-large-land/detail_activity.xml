@@ -14,10 +14,10 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.example.unrealmojo.test.HamsterActivity" >
+        tools:context="com.example.unrealmojo.test.DetailActivity" >
 
         <TextView
-            android:id="@+id/hamsterTitle"
+            android:id="@+id/itemTitle"
             style="@style/CustomTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,24 +30,24 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/itemImage"
             android:layout_width="wrap_content"
             android:layout_height="550dp"
-            android:layout_alignLeft="@+id/hamsterTitle"
-            android:layout_alignRight="@+id/hamsterTitle"
-            android:layout_below="@+id/hamsterTitle"
+            android:layout_alignLeft="@+id/itemTitle"
+            android:layout_alignRight="@+id/itemTitle"
+            android:layout_below="@+id/itemTitle"
             android:scaleType="centerInside"
             android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
 
         <TextView
-            android:id="@+id/hamsterDescription"
+            android:id="@+id/itemDescription"
             style="@style/CustomTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView1"
+            android:layout_alignLeft="@+id/itemImage"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/hamsterTitle"
-            android:layout_below="@+id/imageView1"
+            android:layout_alignRight="@+id/itemTitle"
+            android:layout_below="@+id/itemImage"
             android:textSize="22sp"
             android:text="TextView" />
     </RelativeLayout>

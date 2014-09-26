@@ -1110,14 +1110,14 @@ containing a value of this type.
         public static final int exit=0x7f050046;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int hamsterDescription=0x7f05003f;
-        public static final int hamsterTitle=0x7f05003d;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int imageView1=0x7f05003e;
+        public static final int itemDescription=0x7f05003f;
+        public static final int itemImage=0x7f05003e;
+        public static final int itemTitle=0x7f05003d;
         public static final int listDescription=0x7f050042;
         public static final int listImage=0x7f050040;
         public static final int listMode=0x7f050001;
@@ -1204,7 +1204,7 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
-        public static final int activity_hamster=0x7f030018;
+        public static final int detail_activity=0x7f030018;
         public static final int list=0x7f030019;
         public static final int main=0x7f03001a;
         public static final int support_simple_spinner_dropdown_item=0x7f03001b;
@@ -1267,7 +1267,7 @@ containing a value of this type.
         public static final int program_author=0x7f0a001b;
         public static final int program_title=0x7f0a0019;
         public static final int refresh=0x7f0a0012;
-        public static final int title_activity_hamster=0x7f0a0010;
+        public static final int title_detail_activity=0x7f0a0010;
         public static final int wait=0x7f0a0016;
     }
     public static final class style {

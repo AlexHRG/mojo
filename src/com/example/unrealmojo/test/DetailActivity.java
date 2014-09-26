@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HamsterActivity extends Activity {
+public class DetailActivity extends Activity {
 	 private static final String TAG_TITLE = "title";
      private static final String TAG_DESCRIPTION = "description";
      private static final String TAG_IMAGEPATH = "imagePath";
@@ -21,11 +21,11 @@ public class HamsterActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_hamster);
+		setContentView(R.layout.detail_activity);
 		
-		TextView titleView = (TextView) findViewById(R.id.hamsterTitle);
-		TextView descView = (TextView) findViewById(R.id.hamsterDescription);
-		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		TextView titleView = (TextView) findViewById(R.id.itemTitle);
+		TextView descView = (TextView) findViewById(R.id.itemDescription);
+		ImageView imageView = (ImageView) findViewById(R.id.itemImage);
 		
 		Intent intent = getIntent();
 		String title = intent.getStringExtra(TAG_TITLE);
