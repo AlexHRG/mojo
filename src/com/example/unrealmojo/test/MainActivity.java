@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 	private static final String TAG_PINNED = "pinned";
 	private static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
-	private static String folderName = "/UnrealMojo";
+	private static String folderName = "UnrealMojo";
 	private ProgressDialog pDialog;
 	private ArrayList<Map<String, String>> item_list = new ArrayList<Map<String, String>>();
 	private ListView listView;
@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 		if (savedInstanceState == null){
 			new HardTask().execute();
 		} else {
-			item_list = (ArrayList<Map<String, String>>) savedInstanceState.get("hamsters");
+			item_list = (ArrayList<Map<String, String>>) savedInstanceState.get("items");
 		}
 		
 		adapter = new SimpleAdapter(MainActivity.this,
@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
     
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
-	    outState.putSerializable("hamsters", item_list);
+	    outState.putSerializable("items", item_list);
 	  }
 	
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 
 					String extStorageDirectory = Environment
 							.getExternalStorageDirectory().toString();
-					File filePath = new File(extStorageDirectory + folderName);
+					File filePath = new File(extStorageDirectory + "/" + folderName);
 					filePath.mkdir();
 
 					for (int i = 0; i < jsonArray.length(); i++) {
