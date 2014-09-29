@@ -29,7 +29,6 @@ public class ImageDownloader {
 				} catch (Exception e) {
 
 				}
-
 				
 			} catch (Exception e) {
 				System.out.println("Exc=" + e);
@@ -43,8 +42,7 @@ public class ImageDownloader {
 }
 
 
-// public static Bitmap getRemoteImage(String imageUrl) {//not used in this
-// version
+// public static Bitmap getRemoteImage(String imageUrl) {//not used in this version
 // try {
 // URL url = new URL(imageUrl);
 // final URLConnection conn = url.openConnection();

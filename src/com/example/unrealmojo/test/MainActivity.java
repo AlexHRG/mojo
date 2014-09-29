@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onItemClick(AdapterView<?> parent, View itemClicked,
 					int position, long id) {
