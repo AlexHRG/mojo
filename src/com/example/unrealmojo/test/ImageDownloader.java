@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
+
 import android.util.Log;
 
 public class ImageDownloader {
+	private static final String LOG_TAG = "myLog";
 
 	public static String loadImageToDisc(String url, String path) {
 		File file = new File(path);
@@ -31,9 +33,8 @@ public class ImageDownloader {
 				}
 				
 			} catch (Exception e) {
-				System.out.println("Exc=" + e);
+				Log.d(LOG_TAG, e.getMessage());
 				return null;
-
 			}
 		}
 		return file.getAbsolutePath();
