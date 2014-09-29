@@ -40,22 +40,23 @@ public class ImageDownloader {
 		return file.getAbsolutePath();
 	}
 
-	// public static Bitmap getRemoteImage(String imageUrl) {//not used in this
-	// version
-	// try {
-	// URL url = new URL(imageUrl);
-	// final URLConnection conn = url.openConnection();
-	// conn.connect();
-	// final BufferedInputStream bis = new
-	// BufferedInputStream(conn.getInputStream());
-	// final Bitmap bm = BitmapFactory.decodeStream(bis);
-	// bis.close();
-	//
-	// return bm;
-	// } catch (IOException e) {
-	// Log.d("myTAG", "ImageDownloader: Connection error");
-	// }
-	// return null;
-	// }
-
 }
+
+
+// public static Bitmap getRemoteImage(String imageUrl) {//not used in this
+// version
+// try {
+// URL url = new URL(imageUrl);
+// final URLConnection conn = url.openConnection();
+// conn.connect();
+// final BufferedInputStream bis = new
+// BufferedInputStream(conn.getInputStream());
+// final Bitmap bm = BitmapFactory.decodeStream(bis);
+// bis.close();
+//
+// return bm;
+// } catch (IOException e) {
+// Log.d("myTAG", "ImageDownloader: Connection error");
+// }
+// return null;
+// }
