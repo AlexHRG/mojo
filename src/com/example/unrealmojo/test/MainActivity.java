@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -55,6 +57,10 @@ public class MainActivity extends Activity {
 			item_list = (ArrayList<Map<String, String>>) savedInstanceState.get("items");
 		}
 		
+		createList();
+	}
+	
+	private void createList(){
 		adapter = new SimpleAdapter(MainActivity.this,
 				item_list, R.layout.list, new String[] { TAG_TITLE,
 						TAG_DESCRIPTION, TAG_IMAGEPATH }, new int[] {
