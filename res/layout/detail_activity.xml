@@ -36,7 +36,7 @@
             android:layout_alignLeft="@+id/itemTitle"
             android:layout_alignRight="@+id/itemTitle"
             android:layout_below="@+id/itemTitle"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
 
         <TextView

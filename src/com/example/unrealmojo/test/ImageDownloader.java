@@ -14,7 +14,7 @@ public class ImageDownloader {
 		File file = new File(path);
 
 		if (!file.exists()) {
-			try {
+			try {				
 				InputStream is = (InputStream) new URL(url).getContent();
 
 				file.createNewFile();
