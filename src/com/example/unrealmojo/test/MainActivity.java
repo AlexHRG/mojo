@@ -177,7 +177,7 @@ public class MainActivity extends Activity {
 
 					String extStorageDirectory = Environment
 							.getExternalStorageDirectory().toString();
-					File filePath = new File(extStorageDirectory + "/"
+					File filePath = new File(extStorageDirectory + File.separator
 							+ folderName);
 					filePath.mkdir();
 
