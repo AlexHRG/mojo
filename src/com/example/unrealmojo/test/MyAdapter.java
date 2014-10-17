@@ -1,12 +1,8 @@
 package com.example.unrealmojo.test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,15 +15,14 @@ import android.widget.TextView;
 public class MyAdapter extends BaseAdapter {
 
     private LayoutInflater mLayoutInflater;
-    private List mData;
+    private List<Map<String, String>> mData;
     ImageLoader imageLoader;
 
-    public MyAdapter(Context context, List data){
+    public MyAdapter(Context context, List<Map<String, String>> data){
         mData = data;
         mLayoutInflater = LayoutInflater.from(context);
         
         imageLoader = ImageLoader.getInstance();
-		//imageLoader.init(ImageLoaderConfiguration.createDefault());
     }
 
     @Override
@@ -37,7 +32,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public Map<String, String> getItem(int position) {
-        return (Map<String, String>) mData.get(position);
+        return mData.get(position);
     }
 
     @Override
@@ -48,11 +43,10 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
-      View vi = view;             //trying to reuse a recycled view
+      View vi = view;
       ViewHolder holder = null;
 
       if (vi == null) {
-          //The view is not a recycled one: we have to inflate
           vi = mLayoutInflater.inflate(R.layout.list, parent, false);
           holder = new ViewHolder();
 
@@ -61,9 +55,7 @@ public class MyAdapter extends BaseAdapter {
           holder.listImage = (ImageView) vi.findViewById(R.id.listImage);
           vi.setTag(holder);
       } else {
-          // View recycled !
-          // no need to inflate
-          // no need to findViews by id
+
           holder = (ViewHolder) vi.getTag();
       }
 

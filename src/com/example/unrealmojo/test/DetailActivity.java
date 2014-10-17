@@ -5,12 +5,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,11 +28,7 @@ public class DetailActivity extends Activity {;
 		String description = intent.getStringExtra(MainActivity.TAG_DESCRIPTION);
 		String imagePath = intent.getStringExtra(MainActivity.TAG_IMAGEURL);
 		
-		Log.d(MainActivity.LOG_TAG, imagePath);
-		
 		if (imagePath != MainActivity.TAG_NONE){
-//			Bitmap image = BitmapFactory.decodeFile(imagePath);
-//			imageView.setImageBitmap(image);
 			imageLoader. displayImage(imagePath, imageView);
 		}
 		titleView.setText(title);

@@ -1,6 +1,5 @@
 package com.example.unrealmojo.test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,14 +19,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 public class MainActivity extends Activity {
 	static final String TAG_TITLE = "title";
@@ -38,11 +35,9 @@ public class MainActivity extends Activity {
 	static final String TAG_PINNED = "pinned";
 	static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
-	private static String folderName = "UnrealMojo";
 	private ProgressDialog pDialog;
 	private ArrayList<Map<String, String>> item_list = new ArrayList<Map<String, String>>();
 	private ListView listView;
-//	private SimpleAdapter adapter;
 	private String aboutTitle = "UnrealMojo test task";
 	private String aboutVersion = "pre release";
 	private String aboutAuthor = "HIRURG";
@@ -71,10 +66,6 @@ public class MainActivity extends Activity {
 	}
 
 	private void createList() {
-//		adapter = new SimpleAdapter(MainActivity.this, item_list,
-//				R.layout.list, new String[] { TAG_TITLE, TAG_DESCRIPTION,
-//						TAG_IMAGEURL }, new int[] { R.id.listTitle,
-//						R.id.listDescription, R.id.listImage });
 		myAdapter = new MyAdapter(this, item_list);
 
 		listView.setAdapter(myAdapter);
@@ -185,12 +176,6 @@ public class MainActivity extends Activity {
 				try {
 					JSONArray jsonArray = new JSONArray(jsonStr);
 
-//					String extStorageDirectory = Environment
-//							.getExternalStorageDirectory().toString();
-//					File filePath = new File(extStorageDirectory + File.separator
-//							+ folderName);
-//					filePath.mkdir();
-
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -198,21 +183,11 @@ public class MainActivity extends Activity {
 						String title = null;
 						String description = null;
 						String imageUrl = null;
-						String imagePath = null;
 						String pinned = null;
 
 						title = jsonObject.getString(TAG_TITLE);
 						description = jsonObject.getString(TAG_DESCRIPTION);
 						imageUrl = jsonObject.getString(TAG_IMAGEURL);
-
-//						String[] fileNameTokens = imageUrl.split("/");
-//						int last = fileNameTokens.length - 1;
-//						String fileName = fileNameTokens[last];
-//
-//						imagePath = ImageDownloader.loadImageToDisc(imageUrl,
-//								String.format("%s/%s", filePath.toString(),
-//										fileName));
-
 						pinned = jsonObject.isNull(TAG_PINNED) ? "0" : "1";
 
 						item_data.put(TAG_TITLE, title);
