@@ -10,6 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -27,27 +30,33 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class MainActivity extends Activity {
-	private static final String TAG_TITLE = "title";
-	private static final String TAG_DESCRIPTION = "description";
-	private static final String TAG_IMAGEURL = "image";
-	private static final String TAG_IMAGEPATH = "imagePath";
-	private static final String TAG_PINNED = "pinned";
-	private static final String LOG_TAG = "myLog";
+	static final String TAG_TITLE = "title";
+    static final String TAG_DESCRIPTION = "description";
+	static final String TAG_IMAGEURL = "image";
+	static final String TAG_NONE = "none";
+    static final String TAG_IMAGEPATH = "imagePath";
+	static final String TAG_PINNED = "pinned";
+	static final String LOG_TAG = "myLog";
 	private static String url = "http://unrealmojo.com/porn/test3";
 	private static String folderName = "UnrealMojo";
 	private ProgressDialog pDialog;
 	private ArrayList<Map<String, String>> item_list = new ArrayList<Map<String, String>>();
 	private ListView listView;
-	private SimpleAdapter adapter;
+//	private SimpleAdapter adapter;
 	private String aboutTitle = "UnrealMojo test task";
 	private String aboutVersion = "pre release";
 	private String aboutAuthor = "HIRURG";
+	ImageLoader imageLoader;
+	MyAdapter myAdapter;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		imageLoader = ImageLoader.getInstance();
+		imageLoader.init(ImageLoaderConfiguration.createDefault(this));
 
 		listView = (ListView) findViewById(android.R.id.list);
 
@@ -62,12 +71,13 @@ public class MainActivity extends Activity {
 	}
 
 	private void createList() {
-		adapter = new SimpleAdapter(MainActivity.this, item_list,
-				R.layout.list, new String[] { TAG_TITLE, TAG_DESCRIPTION,
-						TAG_IMAGEPATH }, new int[] { R.id.listTitle,
-						R.id.listDescription, R.id.listImage });
+//		adapter = new SimpleAdapter(MainActivity.this, item_list,
+//				R.layout.list, new String[] { TAG_TITLE, TAG_DESCRIPTION,
+//						TAG_IMAGEURL }, new int[] { R.id.listTitle,
+//						R.id.listDescription, R.id.listImage });
+		myAdapter = new MyAdapter(this, item_list);
 
-		listView.setAdapter(adapter);
+		listView.setAdapter(myAdapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -85,7 +95,7 @@ public class MainActivity extends Activity {
 				intent.putExtra(TAG_TITLE, currentItem.get(TAG_TITLE));
 				intent.putExtra(TAG_DESCRIPTION,
 						currentItem.get(TAG_DESCRIPTION));
-				intent.putExtra(TAG_IMAGEPATH, currentItem.get(TAG_IMAGEPATH));
+				intent.putExtra(TAG_IMAGEURL, currentItem.get(TAG_IMAGEURL));
 
 				startActivity(intent);
 
@@ -175,11 +185,11 @@ public class MainActivity extends Activity {
 				try {
 					JSONArray jsonArray = new JSONArray(jsonStr);
 
-					String extStorageDirectory = Environment
-							.getExternalStorageDirectory().toString();
-					File filePath = new File(extStorageDirectory + File.separator
-							+ folderName);
-					filePath.mkdir();
+//					String extStorageDirectory = Environment
+//							.getExternalStorageDirectory().toString();
+//					File filePath = new File(extStorageDirectory + File.separator
+//							+ folderName);
+//					filePath.mkdir();
 
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -195,19 +205,19 @@ public class MainActivity extends Activity {
 						description = jsonObject.getString(TAG_DESCRIPTION);
 						imageUrl = jsonObject.getString(TAG_IMAGEURL);
 
-						String[] fileNameTokens = imageUrl.split("/");
-						int last = fileNameTokens.length - 1;
-						String fileName = fileNameTokens[last];
-
-						imagePath = ImageDownloader.loadImageToDisc(imageUrl,
-								String.format("%s/%s", filePath.toString(),
-										fileName));
+//						String[] fileNameTokens = imageUrl.split("/");
+//						int last = fileNameTokens.length - 1;
+//						String fileName = fileNameTokens[last];
+//
+//						imagePath = ImageDownloader.loadImageToDisc(imageUrl,
+//								String.format("%s/%s", filePath.toString(),
+//										fileName));
 
 						pinned = jsonObject.isNull(TAG_PINNED) ? "0" : "1";
 
 						item_data.put(TAG_TITLE, title);
 						item_data.put(TAG_DESCRIPTION, description);
-						item_data.put(TAG_IMAGEPATH, imagePath);
+						item_data.put(TAG_IMAGEURL, imageUrl);
 						item_data.put(TAG_PINNED, pinned);
 
 						item_list.add((HashMap<String, String>) item_data);
@@ -235,7 +245,7 @@ public class MainActivity extends Activity {
 			if (pDialog.isShowing())
 				pDialog.dismiss();
 
-			adapter.notifyDataSetChanged();
+			myAdapter.notifyDataSetChanged();
 		}
 
 	}
