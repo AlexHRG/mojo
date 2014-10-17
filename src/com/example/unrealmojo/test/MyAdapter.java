@@ -55,7 +55,6 @@ public class MyAdapter extends BaseAdapter {
           holder.listImage = (ImageView) vi.findViewById(R.id.listImage);
           vi.setTag(holder);
       } else {
-
           holder = (ViewHolder) vi.getTag();
       }
 
